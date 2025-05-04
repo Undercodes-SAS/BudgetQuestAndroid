@@ -5,13 +5,14 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import net.undercodes.budgetquest.ui.theme.BudgetQuestAndroidTheme
 
 @Composable
 fun Screen (modifier: Modifier = Modifier, content: @Composable () -> Unit) {
-    MaterialTheme {
+
         Surface(
             modifier = modifier.fillMaxSize(),
             content = content
         )
-    }
+
 }

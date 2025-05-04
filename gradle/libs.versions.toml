@@ -17,6 +17,7 @@ foundationLayoutAndroid = "1.8.0"
 firebaseAuth = "33.13.0"
 androidx-lifecycle = "2.8.7"
 
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -53,10 +54,11 @@ coil = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseAuth" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundationLayoutAndroid" }
-#Navigation Compose
+# Navigation Compose
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation-compose" }
-#Icons
+# Icons
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
