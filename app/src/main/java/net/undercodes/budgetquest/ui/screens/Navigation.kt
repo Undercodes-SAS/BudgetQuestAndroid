@@ -15,7 +15,7 @@ fun Navigation(modifier: Modifier = Modifier){
         composable("loginScreen"){
             Login(
                 modifier = modifier,
-                onLoginClick = {
+                onLoginSuccess = {
                     navController.navigate("homeScreen")
                 }
             )
