@@ -1,6 +1,7 @@
 package net.undercodes.budgetquest
 
 
+import net.undercodes.budgetquest.ui.components.speechButton.SpeechButtonVM
 import net.undercodes.budgetquest.ui.screens.Login.LoginVM
 import net.undercodes.budgetquest.ui.screens.expenseScreen.ExpenseViewModel
 import org.koin.core.context.startKoin
@@ -13,6 +14,7 @@ import org.koin.dsl.module
 val viewModelModule = module {
    viewModelOf(::LoginVM)
    viewModelOf(::ExpenseViewModel)
+   viewModelOf(::SpeechButtonVM)
 }
 
 
@@ -20,6 +22,6 @@ val viewModelModule = module {
 fun initKoin(config: KoinAppDeclaration? = null) {
    startKoin {
          config?.invoke(this)
-      modules(viewModelModule)
+         modules(viewModelModule)
    }
 }
