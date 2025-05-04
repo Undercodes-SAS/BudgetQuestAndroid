@@ -10,13 +10,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import net.undercodes.budgetquest.R
 import net.undercodes.budgetquest.ui.screens.Screen
-import kotlin.collections.forEachIndexed
-
-
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
@@ -28,10 +24,12 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun FinanceDashboard(modifier: Modifier = Modifier) {
-    val quests = listOf(
-        Quest("Invierte 30 mil en un fondo de inversión de tu preferencia", false),
-        Quest("No gastes más de 20 mil en comida chatarra", false)
-    )
+    val quests = remember {
+        mutableStateListOf(
+            Quest("Invierte 30 mil en un fondo de inversión de tu preferencia", false),
+            Quest("No gastes más de 20 mil en comida chatarra", false)
+        )
+    }
 
     val tips = listOf(
         "Empieza tu vida crediticia pero paga todo a 1 cuota",
@@ -130,9 +128,10 @@ private fun OdditiesSection(oddities: List<String>) {
             )
             Spacer(modifier = Modifier.height(12.dp))
             oddities.forEach { tip ->
-                Row(verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.heightIn(min = TextUnit.Unspecified.value.dp)
-                ){
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.heightIn(min = 0.dp)
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.isotipo),
                         contentDescription = null,
@@ -151,7 +150,7 @@ private fun OdditiesSection(oddities: List<String>) {
 }
 
 @Composable
-private fun QuestsSection(quest: List<Quest>) {
+private fun QuestsSection(quest: MutableList<Quest>) {
     Card {
         Column(
             modifier = Modifier
@@ -169,20 +168,24 @@ private fun QuestsSection(quest: List<Quest>) {
                 var checkedState by remember { mutableStateOf(currentQuest.completed) }
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
                 ) {
-                   Checkbox(
-
-                        checked = currentQuest.completed,
+                    Checkbox(
+                        checked = checkedState,
                         colors = CheckboxDefaults.colors(
-                            checkedColor = MaterialTheme.colorScheme.primary),
+                            checkedColor = MaterialTheme.colorScheme.primary
+                        ),
                         modifier = Modifier.align(Alignment.Top),
-
                         onCheckedChange = { isChecked ->
-                           checkedState = isChecked
+                            checkedState = isChecked
+                            quest[index] = currentQuest.copy(completed = isChecked)
                         }
                     )
-                    Text(text = currentQuest.description, style = MaterialTheme.typography.bodyLarge,
+                    Text(
+                        text = currentQuest.description,
+                        style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.weight(1f)
                     )
                 }
@@ -207,9 +210,10 @@ private fun TipsSection(tips: List<String>) {
             )
             Spacer(modifier = Modifier.height(12.dp))
             tips.forEach { tip ->
-                Row(verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.heightIn(min = TextUnit.Unspecified.value.dp)
-                ){
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.heightIn(min = 0.dp)
+                ) {
                     Icon(
                         painter = painterResource(id = R.drawable.tips_icon),
                         contentDescription = null,
@@ -226,7 +230,6 @@ private fun TipsSection(tips: List<String>) {
         }
     }
 }
-
 
 data class Quest(val description: String, val completed: Boolean)
 

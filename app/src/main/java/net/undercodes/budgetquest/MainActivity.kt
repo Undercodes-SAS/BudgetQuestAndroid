@@ -14,11 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import net.undercodes.budgetquest.intentManager.handleIntent
-import net.undercodes.budgetquest.ui.screens.AppNavigationWithIntent
+
+
 import net.undercodes.budgetquest.ui.screens.Navigation
 import net.undercodes.budgetquest.ui.screens.Screen
-import net.undercodes.budgetquest.ui.screens.expenseScreen.ExpenseViewModel
 import net.undercodes.budgetquest.ui.theme.BudgetQuestAndroidTheme
 import org.koin.compose.KoinContext
 
@@ -29,10 +28,11 @@ class MainActivity : ComponentActivity() {
 
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
-           KoinContext {
-               AppNavigationWithIntent(intent)
-           }
+
+               Navigation()
+
 
         }
 
