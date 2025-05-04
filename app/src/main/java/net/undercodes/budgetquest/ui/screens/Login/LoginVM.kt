@@ -2,14 +2,19 @@ package net.undercodes.budgetquest.ui.screens.Login
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import net.undercodes.budgetquest.data.LoginResponse
 import net.undercodes.budgetquest.data.repositories.UserRepository
-
-class LoginViewModel(private val userRepository: UserRepository = UserRepository()) : ViewModel() {
+import android.app.Application
+class LoginViewModel(
+    application: Application,
+    private val userRepository: UserRepository = UserRepository()
+) : AndroidViewModel(application) {
     val loginResult: MutableState<LoginResult> = mutableStateOf(LoginResult.Idle)
+    val jwtManager = JwtManager(context = getApplication())
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
@@ -17,7 +22,11 @@ class LoginViewModel(private val userRepository: UserRepository = UserRepository
             try {
                 val response = userRepository.login(username, password)
                 if (response.isSuccessful) {
-                    loginResult.value = LoginResult.Success(response.body()!!)
+                    val body: LoginResponse = response.body()!!
+                    jwtManager.saveJwt(body.token.toString())
+                    val userId = jwtManager.decryptJwt(body.token.toString())
+                    jwtManager.saveUserId(userId)
+                    loginResult.value = LoginResult.Success(body)
                 } else {
                     loginResult.value = LoginResult.Error("Login failed")
                 }
