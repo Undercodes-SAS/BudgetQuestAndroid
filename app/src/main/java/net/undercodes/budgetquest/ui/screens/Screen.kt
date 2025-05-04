@@ -12,7 +12,6 @@ fun Screen (modifier: Modifier = Modifier, content: @Composable () -> Unit) {
 
         Surface(
             modifier = modifier.fillMaxSize(),
-            content = content
+            content = content,
         )
-
 }

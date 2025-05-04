@@ -22,7 +22,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import org.koin.compose.viewmodel.koinViewModel
 
 @Composable
-fun SpeechButton(viewModel: SpeechButtonVM = koinViewModel()) {
+fun SpeechButton(viewModel: SpeechButtonVM = viewModel()) {
 
     val context = LocalContext.current
     val recognizerHelper = remember {
