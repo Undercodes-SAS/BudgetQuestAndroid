@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<actions xmlns:android="http://schemas.android.com/apk/res/android">
+    <action android:name="actions.intent.CREATE_MONEY_TRANSACTION">
+        <fulfillment
+            url="gastoapp://registrogasto?texto_gasto={texto_gasto}">
+            <parameter
+                android:name="moneyTransaction.description"
+                android:key="texto_gasto" />
+        </fulfillment>
+    </action>
+</actions>

@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">BudgetQuestAndroid</string>
+    <string name="app_name">BudgetQuest</string>
+    <string name="shortcut_expense_short">Registrar gasto</string>
+    <string name="shortcut_expense_long">Registrar un nuevo gasto</string>
 </resources>
