@@ -10,11 +10,10 @@ import net.undercodes.budgetquest.data.LoginResponse
 import net.undercodes.budgetquest.data.repositories.UserRepository
 import android.app.Application
 class LoginViewModel(
-    application: Application,
     private val userRepository: UserRepository = UserRepository()
-) : AndroidViewModel(application) {
+) : ViewModel() {
     val loginResult: MutableState<LoginResult> = mutableStateOf(LoginResult.Idle)
-    val jwtManager = JwtManager(context = getApplication())
+
 
     fun login(username: String, password: String) {
         viewModelScope.launch {
@@ -23,9 +22,8 @@ class LoginViewModel(
                 val response = userRepository.login(username, password)
                 if (response.isSuccessful) {
                     val body: LoginResponse = response.body()!!
-                    jwtManager.saveJwt(body.token.toString())
-                    val userId = jwtManager.decryptJwt(body.token.toString())
-                    jwtManager.saveUserId(userId)
+
+
                     loginResult.value = LoginResult.Success(body)
                 } else {
                     loginResult.value = LoginResult.Error("Login failed")
