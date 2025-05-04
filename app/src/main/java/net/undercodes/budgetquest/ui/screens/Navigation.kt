@@ -2,10 +2,13 @@ package net.undercodes.budgetquest.ui.screens
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import net.undercodes.budgetquest.ui.screens.Login.Login
 import net.undercodes.budgetquest.ui.screens.homeScreen.HomeScreen
 import net.undercodes.budgetquest.ui.screens.Wallet.WalletScreen
@@ -21,6 +24,7 @@ fun Navigation(modifier: Modifier = Modifier, navController: NavHostController =
                 modifier = modifier,
                 onLoginSuccess = {
                     navController.navigate("homeScreen")
+                    //navController.navigate("homeScreen")
 
                 }
             )
@@ -29,9 +33,15 @@ fun Navigation(modifier: Modifier = Modifier, navController: NavHostController =
             HomeScreen()
         }
 
-        composable("Wallet") {
-            WalletScreen()
+        composable(
+            route = "Wallet/{usuarioId}",
+            arguments = listOf(navArgument("usuarioId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val usuarioId = backStackEntry.arguments?.getInt("usuarioId") ?: 0
+            WalletScreen(viewModel = viewModel(), usuarioId = usuarioId)
         }
+
+
         composable("registroGastoScreen/{gasto_texto}") { backStackEntry ->
             val gastoTexto = backStackEntry.arguments?.getString("gasto_texto")
             SpentRegisterScreen(gastoTexto = gastoTexto)

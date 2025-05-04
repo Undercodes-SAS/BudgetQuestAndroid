@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,6 +17,7 @@ import net.undercodes.budgetquest.ui.screens.Screen
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier) {
+
     Screen {
         FinanceDashboard(modifier)
     }
@@ -23,6 +25,7 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
+
 private fun FinanceDashboard(modifier: Modifier = Modifier) {
     val quests = remember {
         mutableStateListOf(
@@ -40,6 +43,8 @@ private fun FinanceDashboard(modifier: Modifier = Modifier) {
         "¿Sabías que ******* tiene una tarjeta de crédito para Jóvenes?",
         "Uno de los fondos de inversión con mayor rentabilidad es *******"
     )
+
+    val textColor = Color(0xFF08415C)
 
     Scaffold(
         topBar = {
@@ -86,9 +91,12 @@ private fun FinanceDashboard(modifier: Modifier = Modifier) {
 
 @Composable
 private fun WelcomeSection(name: String) {
-    Card(
+        val textColor = Color(0xFF08415C)
+        val cardColor = Color(0xFFCC2936)
+
+        Card(
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.secondaryContainer
+            containerColor = textColor
         )
     ) {
         Column(
@@ -99,13 +107,14 @@ private fun WelcomeSection(name: String) {
             Text(
                 text = "Welcome \n" +
                         "to your finance,",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.headlineMedium,
+                color = White
             )
             Text(
                 text = name,
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
+                    color = White
                 )
             )
         }
@@ -114,14 +123,17 @@ private fun WelcomeSection(name: String) {
 
 @Composable
 private fun OdditiesSection(oddities: List<String>) {
+    val textColor = Color(0xFF08415C)
+
     Card {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(
+             Text(
                 text = "Oddities",
+                color = textColor,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -141,6 +153,7 @@ private fun OdditiesSection(oddities: List<String>) {
 
                     Text(
                         text = tip,
+                        color = textColor,
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
@@ -151,14 +164,18 @@ private fun OdditiesSection(oddities: List<String>) {
 
 @Composable
 private fun QuestsSection(quest: MutableList<Quest>) {
+    val colorCheckBox = Color(0xFF08415C)
+    val textColor = Color(0xFF08415C)
+
     Card {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(
+             Text(
                 text = "Quests",
+                color = textColor,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -175,7 +192,7 @@ private fun QuestsSection(quest: MutableList<Quest>) {
                     Checkbox(
                         checked = checkedState,
                         colors = CheckboxDefaults.colors(
-                            checkedColor = MaterialTheme.colorScheme.primary
+                            checkedColor = colorCheckBox
                         ),
                         modifier = Modifier.align(Alignment.Top),
                         onCheckedChange = { isChecked ->
@@ -185,6 +202,7 @@ private fun QuestsSection(quest: MutableList<Quest>) {
                     )
                     Text(
                         text = currentQuest.description,
+                        color = textColor,
                         style = MaterialTheme.typography.bodyLarge,
                         modifier = Modifier.weight(1f)
                     )
@@ -196,14 +214,17 @@ private fun QuestsSection(quest: MutableList<Quest>) {
 
 @Composable
 private fun TipsSection(tips: List<String>) {
+    val textColor = Color(0xFF08415C)
+
     Card {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            Text(
+             Text(
                 text = "Tips",
+                color = textColor,
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -223,6 +244,7 @@ private fun TipsSection(tips: List<String>) {
 
                     Text(
                         text = tip,
+                        color = textColor,
                         style = MaterialTheme.typography.bodyLarge
                     )
                 }
