@@ -20,8 +20,8 @@ fun Navigation(modifier: Modifier = Modifier, navController: NavHostController =
             Login(
                 modifier = modifier,
                 onLoginSuccess = {
-                    //navController.navigate("homeScreen")
-                    navController.navigate("Wallet")
+                    navController.navigate("homeScreen")
+
                 }
             )
         }
