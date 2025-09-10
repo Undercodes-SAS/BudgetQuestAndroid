@@ -31,8 +31,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
 
-               Navigation()
-
+               App()
 
         }
 
